@@ -8,25 +8,25 @@ class Book(models.Model):
     title = models.CharField(max_length=3999)
     number_of_pages = models.PositiveIntegerField()
     # - user can read all books, but update/delete only their own
-    # ^ ownership of a book was a bit vague. I took the assumption that this
-    # means owner is being the author of a book.
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE)
+    # ^ I'm taking this to mean that a user can update/delete their own
+    # annotations. Books can be deleted if no annotations are present.
+    author = models.CharField(max_length=64)
 
     def get_absolute_url(self):
         return reverse('book-detail', kwargs={'book_id': self.pk})
 
+    def __str__(self):
+        return f"{self.title} by {self.author}"
+
 
 class Annotation(models.Model):
     book = models.ForeignKey(
-        Book, on_delete=models.CASCADE)
+        Book, on_delete=models.PROTECT, related_name="annotations")
     page = models.PositiveIntegerField()
     text = models.TextField()
     annotation_author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
 
-    def get_absolute_url(self):
-        return reverse('annotation-detail', kwargs={'book_id': self.book.pk,
-                                                    'annotation_id': self.pk})
+    def __str__(self):
+        return f"p.{self.page} on {self.book} annotated by {self.annotation_author}"

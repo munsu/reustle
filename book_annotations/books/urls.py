@@ -3,10 +3,10 @@ from . import views
 
 
 urlpatterns = [
-    path('/', views.BookList.as_view(), name='book-list'),
+    path('', views.BookList.as_view(), name='book-list'),
     path('create/', views.BookCreate.as_view(), name='book-create'),
     path('<int:book_id>/', include([
-        path('/', views.BookDetail.as_view(), name='book-detail'),
+        path('', views.BookDetail.as_view(), name='book-detail'),
         path('delete/', views.BookDelete.as_view(), name='book-delete'),
         path('update/', views.BookUpdate.as_view(), name='book-update'),
         path('annotations/', views.BookAnnotationList.as_view(), name='annotation-list'),

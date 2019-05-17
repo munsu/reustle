@@ -1,0 +1,10 @@
+<a href="{% url 'book-list' %}">Back</a>
+{{ object }}
+<ul>
+{% for annotation in object.annotations.all %}
+  <li>p.{{ annotation.page }}: {{ annotation.text }} ({{ annotation.annotation_author}}){% if user == annotation.annotation_author %} <a href="{% url 'annotation-update' object.pk annotation.pk %}">Update</a> <a href="{% url 'annotation-delete' object.pk annotation.pk %}">Delete</a>{% endif %}</li>
+{% empty %}
+  <li>You don't have any annotations here yet</li>
+{% endfor %}
+</ul>
+<a href="{% url 'annotation-create' object.pk %}">Create new annotation</a>

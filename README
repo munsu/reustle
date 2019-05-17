@@ -1,0 +1,14 @@
+From Alain
+----------
+
+I would like Robin to:
+- setup a basic django project
+- create models and CRUD endpoint for the resources needed to implement the following functionalities:
+  - user can create a `Book`: title, number_of_pages, author
+  - user can read all books, but update/delete only their own
+  - each book can have `Annotation`s with fields: page, text, annotation_author
+  - user should be able to create a book and a few annotations in one request
+  - user should be able to find books with and without their own annotations via query filter `?has_my_annotations=`
+- They should write 2 unit and 2 integration tests
+- They should use Git to log their work
+- If they have doubts about the requirements, they should make a choice and motivate it with inline comments.

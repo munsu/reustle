@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 
 class Book(models.Model):
@@ -13,6 +14,9 @@ class Book(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
 
+    def get_absolute_url(self):
+        return reverse('book-detail', kwargs={'book_id': self.pk})
+
 
 class Annotation(models.Model):
     book = models.ForeignKey(
@@ -22,3 +26,7 @@ class Annotation(models.Model):
     annotation_author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('annotation-detail', kwargs={'book_id': self.book.pk,
+                                                    'annotation_id': self.pk})

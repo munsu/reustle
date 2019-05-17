@@ -1,37 +1,50 @@
 from django.shortcuts import render
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.views import ListView
+from book_annotations.models import Book, Annotation
 
 
-class BookList(View):
-    pass
+class BookList(ListView):
+
+    model = Book
 
 
-class BookCreate(View):
-    pass
+class BookCreate(CreateView):
+
+    model = Book
 
 
-class BookDetail(View):
-    pass
+class BookDetail(DetailView):
+
+    model = Book
 
 
-class BookDelete(View):
-    pass
+class BookDelete(DeleteView):
+
+    model = Book
 
 
-class BookUpdate(View):
-    pass
+class BookUpdate(UpdateView):
+
+    model = Book
 
 
-class BookAnnotationList(View):
-    pass
+class BookAnnotationList(ListView):
+
+    model = Annotation
 
 
-class BookAnnotationCreate(View):
-    pass
+class BookAnnotationCreate(CreateView):
+
+    model = Annotation
 
 
-class BookAnnotationDelete(View):
-    pass
+class BookAnnotationDelete(DeleteView):
+
+    model = Annotation
 
 
-class BookAnnotationUpdate(View):
-    pass
+class BookAnnotationUpdate(UpdateView):
+
+    model = Annotation
